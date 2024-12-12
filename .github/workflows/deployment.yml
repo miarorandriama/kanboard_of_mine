@@ -34,3 +34,20 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: main_repo
           IMAGE_TAG: v1.0.0
+
+      - name: Create namespace if not exists
+        run: |
+          kubectl get namespace kanboard || kubectl create namespace kanboard
+          kubectl config set-context --current --namespace=productions  
+      
+      - name: Apply manifest
+        uses: kubernetes-sigs/action-yaml@v2
+        with:
+          path: ./k8s
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: main_repo
+          IMAGE_TAG: ${{ github.sha }}
+        
+      - name: Force restart pods
+        run: kubectl rollout restart #deployment/projet-master
