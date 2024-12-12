@@ -41,13 +41,11 @@ jobs:
           kubectl config set-context --current --namespace=productions  
       
       - name: Apply manifest
-        uses: kubernetes-sigs/action-yaml@v2
-        with:
-          path: ./k8s
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: main_repo
-          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          kubectl apply kanboard-sc.yaml
+          kubectl apply kanboard-pvc.yaml
+          kubectl apply kanboard-svc.yaml
+          kubectl apply kanboard-deployment.yaml
         
       - name: Force restart pods
         run: kubectl rollout restart #deployment/projet-master
