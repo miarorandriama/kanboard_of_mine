@@ -1,0 +1,52 @@
+name: Deploy to Amazon EKS
+
+on:
+#  pull_request:
+#    types:
+#      - closed
+  # push:
+  #   branches: [ main ]
+  release:
+    types: [released, edited]
+    
+jobs:
+  build-and-deploy:
+#    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+        
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t $ECR_REGISTRY/$REPOSITORY:${{ github.event.release.name }} .
+          docker push $ECR_REGISTRY/$REPOSITORY:${{ github.event.release.name }}
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: main_repo
+
+      #- name: Create namespace if not exists
+       # run: |
+        #  kubectl get namespace kanboard || kubectl create namespace kanboard
+         # kubectl config set-context --current --namespace=productions  
+      
+      #- name: Apply manifest
+       # run: |
+        #  kubectl apply kanboard-sc.yaml
+         # kubectl apply kanboard-pvc.yaml
+          #kubectl apply kanboard-svc.yaml
+          #kubectl apply kanboard-deployment.yaml
+        
+      #- name: Force restart pods
+      #  run: kubectl rollout restart #deployment/projet-master
