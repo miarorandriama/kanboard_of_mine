@@ -1,4 +1,4 @@
-name: Deploy to Amazon EKS
+name: Build and push image to ECR
 
 on:
 #  pull_request:
