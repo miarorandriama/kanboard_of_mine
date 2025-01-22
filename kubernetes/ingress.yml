@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kb_ingress
+  name: kb-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: kb_example
+  ingressClassName: kb-example
   rules:
   - http:
       paths:

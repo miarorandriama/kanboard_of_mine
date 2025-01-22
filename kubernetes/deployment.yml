@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kb_deployment
+  name: kb-deployment
   labels:
     app: kanboard
 spec:
@@ -15,7 +15,7 @@ spec:
         app: kanboard
     spec:
       containers:
-      - name: kb_pod
+      - name: kb-pod
         imagePullSecrets:
         - name: regcred
         # the regcred is created using the ~/.docker/config.json
