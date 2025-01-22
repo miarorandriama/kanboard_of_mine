@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kb_deployment
+  labels:
+    app: kanboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kanboard
+  template:
+    metadata:
+      labels:
+        app: kanboard
+    spec:
+      containers:
+      - name: kb_pod
+        imagePullSecrets:
+        - name: regcred
+        # the regcred is created using the ~/.docker/config.json
+        image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.2-fix
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
