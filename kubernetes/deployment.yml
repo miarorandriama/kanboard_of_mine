@@ -26,7 +26,5 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 80
-          args:
-            - --cluster-name=kanboard-cluster
       imagePullSecrets:
         - name: regcred
