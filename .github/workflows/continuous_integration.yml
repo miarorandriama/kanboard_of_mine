@@ -1,17 +1,11 @@
 name: Build and push image to ECR
 
 on:
-#  pull_request:
-#    types:
-#      - closed
-  # push:
-  #   branches: [ main ]
   release:
     types: [released, edited]
     
 jobs:
   build-and-deploy:
-#    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -35,18 +29,3 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: main_repo
-
-      #- name: Create namespace if not exists
-       # run: |
-        #  kubectl get namespace kanboard || kubectl create namespace kanboard
-         # kubectl config set-context --current --namespace=productions  
-      
-      #- name: Apply manifest
-       # run: |
-        #  kubectl apply kanboard-sc.yaml
-         # kubectl apply kanboard-pvc.yaml
-          #kubectl apply kanboard-svc.yaml
-          #kubectl apply kanboard-deployment.yaml
-        
-      #- name: Force restart pods
-      #  run: kubectl rollout restart #deployment/projet-master
