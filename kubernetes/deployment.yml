@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kb-pod
-          image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.3
+          image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.4
           resources:
             requests:
               memory: "64Mi"
