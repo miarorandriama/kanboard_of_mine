@@ -5,7 +5,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app.kubernetes.io/name: kb-deployment
+    app: kanboard
   ports:
     - protocol: TCP
       port: 80
