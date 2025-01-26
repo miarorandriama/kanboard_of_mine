@@ -27,4 +27,4 @@ spec:
           ports:
             - containerPort: 80
       imagePullSecrets:
-        - name: regcred
+        - name: ecr-registry-creds
