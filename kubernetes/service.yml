@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: kb-service
 spec:
+  type: LoadBalancer
   selector:
     app.kubernetes.io/name: kb-deployment
   ports:

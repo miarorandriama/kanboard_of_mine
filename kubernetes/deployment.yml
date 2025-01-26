@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kanboard
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kanboard
@@ -19,7 +19,7 @@ spec:
         imagePullSecrets:
         - name: regcred
         # the regcred is created using the ~/.docker/config.json
-        image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.2-fix
+        image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.3
         resources:
           requests:
             memory: "64Mi"
@@ -29,3 +29,4 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
+        
