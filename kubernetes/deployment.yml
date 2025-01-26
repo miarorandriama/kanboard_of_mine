@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kanboard
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kanboard
