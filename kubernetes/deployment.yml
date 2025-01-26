@@ -15,18 +15,18 @@ spec:
         app: kanboard
     spec:
       containers:
-      - name: kb-pod
-        imagePullSecrets:
+        - name: kb-pod
+          image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.3
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+          args:
+            - --cluster-name=kanboard-cluster
+      imagePullSecrets:
         - name: regcred
-        # the regcred is created using the ~/.docker/config.json
-        image: 228802243251.dkr.ecr.us-east-2.amazonaws.com/main_repo:v1.0.3
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 80
-        
