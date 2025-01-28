@@ -1,4 +1,4 @@
-KANBOARD 
+KANBOARD OF MINE
 ========
 
 Kanboard is project management software that focuses on the Kanban methodology.
